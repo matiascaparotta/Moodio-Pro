@@ -45,20 +45,20 @@ This project is actively in development and follows SaaS best practices.
 
 Moodio-Pro/
 │
-├── client/            # Frontend (React.js)
+├── client/          # Frontend (React.js)
 │   └── src/
-│       ├── pages/     # Page level components (Login, Register, PatientForm, PatientList, Dashboard, etc.)
-│       ├── components/# Reusable UI components
-│       └── services/  # Axios configuration & API calls
+│       ├── pages/        # Page level components (Login, Register, PatientForm, PatientList, TherapistProfile, Dashboard, etc.)
+│       ├── components/   # Reusable UI components (Navbar, Inputs, Buttons, Forms)
+│       └── services/     # Axios configuration & API calls
 │
-└── server/            # Backend (Node.js + Express.js)
-    ├── controllers/   # Business logic (auth, patients, therapist profile)
-    ├── models/        # Sequelize models
-    ├── routes/        # API routes
-    └── middlewares/   # Auth middlewares (JWT verification)
+├── server/          # Backend (Node.js + Express.js + Sequelize ORM)
+│   ├── controllers/  # Business logic (auth, patients, therapist profile, sessions)
+│   ├── models/       # Sequelize models (MySQL DB)
+│   ├── routes/       # API routes (auth, patients, therapists, sessions)
+│   └── middlewares/  # Auth middlewares (JWT verification)
+│
+└── README.md        # Full professional documentation
 
-
----
 
 ## ⚙ Installation
 
