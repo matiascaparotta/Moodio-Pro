@@ -42,7 +42,7 @@ This project is actively in development and follows SaaS best practices.
 
 ## 📂 Project Structure
 
-\`\`\`
+
 Moodio-Pro/
 │
 ├── client/            # Frontend (React.js)
@@ -56,7 +56,7 @@ Moodio-Pro/
     ├── models/        # Sequelize models
     ├── routes/        # API routes
     └── middlewares/   # Auth middlewares (JWT verification)
-\`\`\`
+
 
 ---
 
