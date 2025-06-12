@@ -1,10 +1,36 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import PatientForm from './pages/PatientForm';
+import PatientList from './pages/PatientList';
+import PrivateRoute from './components/PrivateRoute';
+import Navbar from './components/Navbar';
+import './styles/global.css'; // 👈 importamos el global
+import PatientSessions from './pages/PatientSessions';
+import Profile from './pages/Profile';
+import PatientDetail from './pages/PatientDetail';
+import TherapistDashboard from './pages/TherapistDashboard';
+import TherapistPublicProfile from './pages/TherapistPublicProfile';
 function App() {
   return (
-    <div>
-      <h1>Welcome to Moodio Pro</h1>
-      <p>Project is up and running.</p>
-    </div>
+    <Router>
+      <Navbar />
+      <div style={{ maxWidth: 900, margin: '40px auto', padding: '0 20px' }}>
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/create-patient" element={<PrivateRoute><PatientForm /></PrivateRoute>} />
+          <Route path="/patients" element={<PrivateRoute><PatientList /></PrivateRoute>} />
+          <Route path="/patients/:patientId/sessions" element={<PrivateRoute><PatientSessions /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/patients/:id" element={<PrivateRoute><PatientDetail /></PrivateRoute>} />
+          <Route path="/dashboard" element={<PrivateRoute><TherapistDashboard /></PrivateRoute>} />
+          <Route path="/therapists/:id" element={<TherapistPublicProfile />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
-export default App;
+export default App; 
