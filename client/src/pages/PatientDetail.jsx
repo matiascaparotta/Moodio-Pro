@@ -23,19 +23,31 @@ function PatientDetail() {
   if (!patient) return <div>Loading...</div>;
 
   return (
-    <div style={{ maxWidth: '700px', margin: '40px auto', padding: '20px', background: 'white', borderRadius: '10px' }}>
-      <h2>{patient.firstName} {patient.lastName}</h2>
-      <p><strong>Birth Year:</strong> {patient.birthYear}</p>
-      <p><strong>Gender:</strong> {patient.gender}</p>
-      <p><strong>Conditions:</strong> {patient.existingConditions}</p>
-      <p><strong>Medications:</strong> {patient.currentMedications}</p>
-      <p><strong>Goals:</strong> {patient.treatmentGoals}</p>
-      <p><strong>Notes:</strong> {patient.notes}</p>
+    <div style={{
+      maxWidth: '700px',
+      margin: '40px auto',
+      padding: '30px',
+      background: '#fff',
+      borderRadius: '12px',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+    }}>
+      <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>
+        {patient.firstName} {patient.lastName}
+      </h2>
+
       {patient.profileImage && (
-        <div style={{ marginBottom: 20 }}>
-          <img src={patient.profileImage} alt="Profile" width="150" height="150" style={{ borderRadius: '10px' }} />
+        <div style={{ marginBottom: 20, textAlign: 'center' }}>
+          <img src={patient.profileImage} alt="Profile" width="180" style={{ borderRadius: '12px' }} />
         </div>
       )}
+
+      <div style={{ marginBottom: '10px' }}><strong>Birth Year:</strong> {patient.birthYear}</div>
+      <div style={{ marginBottom: '10px' }}><strong>Gender:</strong> {patient.gender || 'N/A'}</div>
+      <div style={{ marginBottom: '10px' }}><strong>Conditions:</strong> {patient.existingConditions || 'N/A'}</div>
+      <div style={{ marginBottom: '10px' }}><strong>Medications:</strong> {patient.currentMedications || 'N/A'}</div>
+      <div style={{ marginBottom: '10px' }}><strong>Goals:</strong> {patient.treatmentGoals || 'N/A'}</div>
+      <div style={{ marginBottom: '20px' }}><strong>Notes:</strong> {patient.notes || 'N/A'}</div>
+
       <Link to={`/patients/${patient.id}/sessions`}>
         <PrimaryButton>View Sessions</PrimaryButton>
       </Link>

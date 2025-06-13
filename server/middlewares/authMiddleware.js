@@ -3,20 +3,25 @@ const jwt = require('jsonwebtoken');
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  console.log('AUTH HEADER RECIBIDO ===>', authHeader); // 👈 Agregamos este log
-
   if (!authHeader) {
     return res.status(401).json({ message: 'Access denied. No token provided.' });
   }
 
-  const token = authHeader.split(' ')[1];  // 👈 🚀 Esta es la línea CLAVE
+  // Aseguramos que el header tiene formato correcto "Bearer <token>"
+  const parts = authHeader.split(' ');
+
+  if (parts.length !== 2 || parts[0] !== 'Bearer') {
+    return res.status(400).json({ message: 'Invalid authorization header format.' });
+  }
+
+  const token = parts[1];
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // contains userId and role
+    req.user = decoded; // contiene userId y role
     next();
   } catch (err) {
-    console.error('ERROR VERIFICANDO TOKEN ===>', err);
+    console.error('Token verification error:', err.message);
     res.status(401).json({ message: 'Invalid token.' });
   }
 };

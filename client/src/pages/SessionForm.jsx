@@ -17,8 +17,9 @@ function SessionForm({ patientId, onSessionCreated }) {
       await API.post('/sessions', { ...form, patientId });
       alert('Session created');
       setForm({ date: '', notes: '' });
-      if (onSessionCreated) onSessionCreated(); // Refresh parent
+      if (onSessionCreated) onSessionCreated();
     } catch (err) {
+      console.error(err);
       alert('Error creating session.');
     }
   };
@@ -27,7 +28,7 @@ function SessionForm({ patientId, onSessionCreated }) {
     <FormContainer>
       <h2>New Session</h2>
       <form onSubmit={handleSubmit}>
-        <InputField label="Date" type="date" name="date" value={form.date} onChange={handleChange} />
+        <InputField label="Date" type="date" name="date" value={form.date} onChange={handleChange} required />
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Notes</label>
           <textarea

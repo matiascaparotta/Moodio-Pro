@@ -18,20 +18,30 @@ function PatientForm() {
     notes: ''
   });
 
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validación básica de los campos obligatorios
+    if (!form.firstName || !form.lastName || !form.birthYear) {
+      setError('First Name, Last Name and Birth Year are required.');
+      return;
+    }
+
     try {
       const res = await API.post('/patients', form);
       alert('Patient created');
-      navigate(`/patients/${res.data.id}`);  // Redirige al detalle del paciente creado
+      navigate(`/patients/${res.data.id}`);
     } catch (err) {
-      alert('Error creating patient.');
+      console.error(err);
+      setError('Error creating patient.');
     }
   };
 
@@ -58,6 +68,7 @@ function PatientForm() {
         <InputField label="Treatment Goals" type="text" name="treatmentGoals" value={form.treatmentGoals} onChange={handleChange} />
         <InputField label="Notes" type="text" name="notes" value={form.notes} onChange={handleChange} />
 
+        {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
         <PrimaryButton type="submit">Save</PrimaryButton>
       </form>
     </FormContainer>

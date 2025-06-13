@@ -1,0 +1,33 @@
+.home-container {
+    min-height: 100vh;
+    background: linear-gradient(to right, #f3e5f5, #e1bee7, #ffccbc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .home-box {
+    background: white;
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .home-box h1 {
+    font-size: 40px;
+    color: var(--blue);
+    margin-bottom: 20px;
+  }
+  
+  .home-box p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }

@@ -25,28 +25,47 @@ function TherapistDashboard() {
 
   return (
     <div style={{ maxWidth: '900px', margin: '40px auto', padding: '20px' }}>
-      <h2>Welcome, {profile.fullName}</h2>
-      <p><strong>Email:</strong> {profile.email}</p>
-      <p><strong>Specialty:</strong> {profile.specialty}</p>
-      <p><strong>Bio:</strong> {profile.bio}</p>
-      {profile.profileImage && (
-        <div style={{ marginBottom: 20 }}>
-          <img src={profile.profileImage} alt="Profile" width="150" style={{ borderRadius: '10px' }} />
-        </div>
-      )}
+      <h2 style={{ color: 'var(--blue)', marginBottom: '10px' }}>Welcome, {profile.fullName}</h2>
+      <div style={{
+        background: '#fff',
+        padding: '20px',
+        borderRadius: '12px',
+        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+        marginBottom: '30px'
+      }}>
+        <p><strong>Email:</strong> {profile.email}</p>
+        <p><strong>Specialty:</strong> {profile.specialty}</p>
+        <p><strong>Bio:</strong> {profile.bio}</p>
+        {profile.profileImage && (
+          <div style={{ marginBottom: 20 }}>
+            <img src={profile.profileImage} alt="Profile" width="150" style={{ borderRadius: '10px' }} />
+          </div>
+        )}
+      </div>
 
-      <h3>Your Patients</h3>
-      {patients.length === 0 && <p>No patients yet.</p>}
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
-        {patients.map(patient => (
-          <li key={patient.id} style={{ marginBottom: '15px' }}>
-            {patient.firstName} {patient.lastName} ({patient.birthYear}) 
-            <Link to={`/patients/${patient.id}`}>
-              <PrimaryButton style={{ marginLeft: '10px' }}>View</PrimaryButton>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div style={{ marginBottom: '20px' }}>
+        <h3 style={{ color: 'var(--blue)' }}>Your Patients</h3>
+        {patients.length === 0 && <p>No patients yet.</p>}
+        <ul style={{ listStyleType: 'none', padding: 0 }}>
+          {patients.map(patient => (
+            <li key={patient.id} style={{
+              background: '#fff',
+              padding: '15px',
+              borderRadius: '12px',
+              marginBottom: '15px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              boxShadow: '0 0 5px rgba(0,0,0,0.1)'
+            }}>
+              <div>{patient.firstName} {patient.lastName} ({patient.birthYear})</div>
+              <Link to={`/patients/${patient.id}`}>
+                <PrimaryButton>View</PrimaryButton>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

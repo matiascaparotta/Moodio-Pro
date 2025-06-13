@@ -2,8 +2,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
+// REGISTER
 exports.register = async (req, res) => {
   const { email, password } = req.body;
+
+  // Validación básica de campos vacíos
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
 
   try {
     const existingUser = await User.findOne({ where: { email } });
@@ -16,7 +22,7 @@ exports.register = async (req, res) => {
     const newUser = await User.create({
       email,
       password: hashedPassword,
-      role: 'therapist'
+      role: 'therapist' // Default role para este MVP
     });
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -26,8 +32,14 @@ exports.register = async (req, res) => {
   }
 };
 
+// LOGIN
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+
+  // Validación básica de campos vacíos
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
 
   try {
     const user = await User.findOne({ where: { email } });

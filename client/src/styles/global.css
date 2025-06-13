@@ -9,3 +9,41 @@ body {
   h2 {
     color: #111827;
   }
+  :root {
+    --lavender: #f5f0ff;
+    --coral: #ff6b6b;
+    --blue: #4f6ef7;
+    --dark: #333;
+    --border-radius: 12px;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--lavender);
+    color: var(--dark);
+  }
+  
+  button {
+    background-color: var(--coral);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #ff5252;
+  }
+  
+  input {
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    width: 100%;
+    box-sizing: border-box;
+  }
