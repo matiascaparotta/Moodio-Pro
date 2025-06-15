@@ -7,6 +7,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,  // puerto correcto
     dialect: 'mysql',
   }
 );
@@ -20,6 +21,7 @@ db.User = require('./User')(sequelize, Sequelize.DataTypes);
 db.Patient = require('./Patient')(sequelize, Sequelize.DataTypes);
 db.Session = require('./Session')(sequelize, Sequelize.DataTypes);
 
+// Relaciones:
 db.Patient.belongsTo(db.User, { foreignKey: 'therapistId' });
 db.User.hasMany(db.Patient, { foreignKey: 'therapistId' });
 
