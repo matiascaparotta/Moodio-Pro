@@ -4,15 +4,23 @@ const cors = require('cors');
 const app = express();
 const db = require('./models');
 
-// Configuración de CORS robusta
+// Configuración de CORS mejorada
+const allowedOrigins = [
+  'https://moodio-pro.vercel.app',
+  'http://localhost:3000',
+  undefined
+];
+
+const dynamicAllowed = (origin) => {
+  return (
+    allowedOrigins.includes(origin) || 
+    (origin && origin.endsWith('.vercel.app'))
+  );
+};
+
 const corsOptions = {
   origin: (origin, callback) => {
-    const allowedOrigins = [
-      'https://moodio-pro.vercel.app',
-      'http://localhost:3000',
-      undefined
-    ];
-    if (allowedOrigins.includes(origin)) {
+    if (dynamicAllowed(origin)) {
       callback(null, true);
     } else {
       console.error(`Blocked by CORS: ${origin}`);
