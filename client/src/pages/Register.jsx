@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // Agregado
 import FormContainer from '../components/FormContainer';
 import InputField from '../components/InputField';
 import PrimaryButton from '../components/PrimaryButton';
 import API from '../services/api';
 
 function Register() {
+  const navigate = useNavigate(); // Hook para navegación
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setError(''); // Limpiamos error al escribir
+    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación frontend básica
     if (!form.email || !form.password) {
       setError('Please fill in all required fields.');
       return;
@@ -25,7 +26,7 @@ function Register() {
     try {
       await API.post('/auth/register', form);
       alert('Registered successfully');
-      setForm({ email: '', password: '' }); // Limpiamos form después de registrar
+      navigate('/login');  // 👈 REDIRECCIONAMOS AL LOGIN
     } catch (err) {
       if (err.response?.data?.message === 'Email already in use') {
         setError('This email is already registered.');

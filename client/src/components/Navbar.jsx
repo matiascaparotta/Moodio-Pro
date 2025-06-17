@@ -14,7 +14,9 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h2 className="logo">Moodio Pro</h2>
+      <h2 className="logo">
+        <Link to="/" className="logo-link">Moodio Pro</Link>
+      </h2>
       <div className="nav-links">
         {token ? (
           <>
