@@ -39,3 +39,9 @@
 .logout-btn:hover {
   background-color: #e95555;
 }
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
