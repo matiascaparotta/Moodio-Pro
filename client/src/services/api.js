@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5001/api',
+  baseURL: process.env.REACT_APP_API_URL + '/api',
 });
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
-  console.log('TOKEN ENVIADO EN HEADER ===>', token); // 👈 👈 👈 Agregado clave
+  console.log('TOKEN ENVIADO EN HEADER ===>', token);
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
