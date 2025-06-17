@@ -4,21 +4,22 @@ const cors = require('cors');
 const app = express();
 const db = require('./models');
 
-// Configuración avanzada de CORS
-const allowedOrigins = [
-  'https://moodio-f89q5x52p-matias-caparottas-projects.vercel.app',
-];
-
+// Configuración de CORS robusta
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'https://moodio-pro.vercel.app',
+      'http://localhost:3000',
+      undefined
+    ];
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error(`Blocked by CORS: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true,
+  credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -35,12 +36,14 @@ const therapistRoutes = require('./routes/therapist');
 db.sequelize.sync({ alter: true }).then(() => {
   console.log('Database synced');
 
+  // Registro de rutas después del sync
   app.use('/api/auth', authRoutes);
   app.use('/api/patients', patientRoutes);
   app.use('/api/sessions', sessionRoutes);
   app.use('/api/profile', profileRoutes);
   app.use('/api/therapists', therapistRoutes);
 
+  // Inicio del servidor
   app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
   });
