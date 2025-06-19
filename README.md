@@ -151,3 +151,4 @@ Matías Caparotta
 
 ✅ MVP v1.0 SaaS Stable Core Completed  
 🚀 Actively growing as a SaaS vertical product
+Matias
