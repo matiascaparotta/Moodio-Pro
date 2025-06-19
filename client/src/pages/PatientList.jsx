@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import API from '../services/api';
 import PrimaryButton from '../components/PrimaryButton';
 import { FaTrash } from 'react-icons/fa';
+import '../styles/PatientList.css';
 
 function PatientList() {
   const [patients, setPatients] = useState([]);
@@ -35,25 +36,33 @@ function PatientList() {
 
   return (
     <div className="container">
-      <h2 style={{ color: 'var(--blue)', marginBottom: '30px' }}>Your Patients</h2>
-
+      <h2 className="page-title">Your Patients</h2>
       {loading && <p>Loading patients...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="error-text">{error}</p>}
       {!loading && patients.length === 0 && <p>No patients yet.</p>}
 
       <div className="patient-list">
         {patients.map((patient) => (
           <div key={patient.id} className="patient-card">
-            <FaTrash 
-              onClick={() => handleDelete(patient.id)}
-              className="delete-icon"
-              title="Delete patient"
-            />
-            <h3>{patient.firstName} {patient.lastName}</h3>
-            <p>Born: {patient.birthYear}</p>
-            <div className="patient-buttons">
+            <div className="patient-info-box">
+              {patient.profileImage && (
+                <img
+                  src={patient.profileImage}
+                  alt="Profile"
+                  className="patient-avatar"
+                />
+              )}
+              <div className="patient-name-box">
+                <p className="patient-name">{patient.firstName} {patient.lastName}</p>
+                <p className="patient-meta">({patient.birthYear})</p>
+              </div>
+            </div>
+            <div className="patient-actions">
               <Link to={`/patients/${patient.id}`}><PrimaryButton>Profile</PrimaryButton></Link>
               <Link to={`/patients/${patient.id}/sessions`}><PrimaryButton>Sessions</PrimaryButton></Link>
+              <button onClick={() => handleDelete(patient.id)} className="delete-btn" title="Delete patient">
+                <FaTrash />
+              </button>
             </div>
           </div>
         ))}

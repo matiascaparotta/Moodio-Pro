@@ -4,7 +4,7 @@ const Patient = db.Patient;
 // ✅ CREAR PACIENTE EXPANDIDO
 exports.createPatient = async (req, res) => {
   try {
-    const therapistId = req.user.userId;  // Obtenemos el terapeuta desde el token
+    const therapistId = req.user.userId;
 
     const {
       firstName,
@@ -38,17 +38,36 @@ exports.createPatient = async (req, res) => {
   }
 };
 
-// ✅ LISTAR PACIENTES SOLO DEL TERAPEUTA
+// ✅ OBTENER TODOS LOS PACIENTES DEL TERAPEUTA
 exports.getPatients = async (req, res) => {
   try {
     const therapistId = req.user.userId;
-    const patients = await Patient.findAll({
-      where: { therapistId }
-    });
+    const patients = await Patient.findAll({ where: { therapistId } });
     res.json(patients);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error fetching patients' });
+  }
+};
+
+// ✅ OBTENER UN PACIENTE POR ID
+exports.getPatientById = async (req, res) => {
+  try {
+    const therapistId = req.user.userId;
+    const { id } = req.params;
+
+    const patient = await Patient.findOne({
+      where: { id, therapistId }
+    });
+
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+
+    res.json(patient);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error fetching patient' });
   }
 };
 

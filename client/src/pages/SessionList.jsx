@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import API from '../services/api';
 import PrimaryButton from '../components/PrimaryButton';
+import '../styles/SessionList.css';
 
 function SessionList({ patientId }) {
   const [sessions, setSessions] = useState([]);
+  const [expandedId, setExpandedId] = useState(null);
 
   const fetchSessions = async () => {
     try {
@@ -19,7 +21,9 @@ function SessionList({ patientId }) {
   }, [patientId]);
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure?')) return;
+    const confirmed = window.confirm('Are you sure you want to delete this session?');
+    if (!confirmed) return;
+
     try {
       await API.delete(`/sessions/${id}`);
       setSessions(sessions.filter(s => s.id !== id));
@@ -28,25 +32,42 @@ function SessionList({ patientId }) {
     }
   };
 
+  const formatDateTime = (datetime) => {
+    const date = new Date(datetime);
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  };
+
+  const toggleExpand = (id) => {
+    setExpandedId(expandedId === id ? null : id);
+  };
+
   return (
-    <div style={{
-      backgroundColor: 'white',
-      padding: '30px',
-      borderRadius: '10px',
-      boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-      marginTop: '20px'
-    }}>
+    <div className="session-list-container">
       <h3>Session History</h3>
       {sessions.length === 0 && <p>No sessions yet.</p>}
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
+      <div className="session-list">
         {sessions.map((session) => (
-          <li key={session.id} style={{ marginBottom: 15 }}>
-            <div><strong>Date:</strong> {session.date.slice(0, 10)}</div>
-            <div><strong>Notes:</strong> {session.notes}</div>
-            <PrimaryButton onClick={() => handleDelete(session.id)} style={{ marginTop: 10 }}>Delete</PrimaryButton>
-          </li>
+          <div key={session.id} className="session-card">
+            <div className="session-header">
+              <span className="session-date">{formatDateTime(session.date)}</span>
+            </div>
+            <div className="session-notes">
+              {expandedId === session.id || session.notes.length < 200 ? (
+                <p>{session.notes}</p>
+              ) : (
+                <>
+                  <p>{session.notes.slice(0, 200)}...</p>
+                  <button className="link-button" onClick={() => toggleExpand(session.id)}>Read more</button>
+                </>
+              )}
+            </div>
+            <div className="session-actions">
+              <PrimaryButton onClick={() => handleDelete(session.id)} className="delete-btn">Delete</PrimaryButton>
+              {/* Future: Add Edit button */}
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

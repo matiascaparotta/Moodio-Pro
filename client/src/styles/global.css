@@ -183,3 +183,33 @@ input {
     width: 100%;
   }
 }
+
+.patient-image img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+.profile-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.patient-image {
+  flex: 1 1 250px;
+}
+
+.patient-info {
+  flex: 2 1 400px;
+}
+.logo {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}

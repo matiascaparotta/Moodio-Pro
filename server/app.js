@@ -1,4 +1,9 @@
-require('dotenv').config();
+const path = require('path');
+
+// Carga dinámica de variables de entorno según NODE_ENV
+const env = process.env.NODE_ENV || 'development';
+require('dotenv').config({ path: path.resolve(__dirname, `.env.${env}`) });
+
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -28,7 +33,7 @@ const corsOptions = {
     }
   },
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'], // 👈 clave para que funcione el token en Safari
+  allowedHeaders: ['Content-Type', 'Authorization'], // Clave para Safari y tokens
 };
 
 app.use(cors(corsOptions));
@@ -41,7 +46,7 @@ const sessionRoutes = require('./routes/session');
 const profileRoutes = require('./routes/profile');
 const therapistRoutes = require('./routes/therapist');
 
-// Sincronización
+// Sincronización de la base de datos
 db.sequelize.sync({ alter: true }).then(() => {
   console.log('Database synced');
 

@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
+
 const patientController = require('../controllers/patientController');
 const { verifyToken } = require('../middlewares/authMiddleware');
 
-// Todas las rutas están protegidas por el token ✅
+// ✅ Verificamos el token para todas las rutas
+router.use(verifyToken);
 
-router.post('/', verifyToken, patientController.createPatient);
-router.get('/', verifyToken, patientController.getPatients);
-router.put('/:id', verifyToken, patientController.updatePatient);
-router.delete('/:id', verifyToken, patientController.deletePatient);
+router.post('/', patientController.createPatient);
+router.get('/', patientController.getPatients);
+router.get('/:id', patientController.getPatientById); // 👉 Agregá esta línea
+router.put('/:id', patientController.updatePatient);
+router.delete('/:id', patientController.deletePatient);
 
 module.exports = router;

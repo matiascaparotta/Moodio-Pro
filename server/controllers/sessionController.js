@@ -3,7 +3,7 @@ const Session = db.Session;
 
 exports.createSession = async (req, res) => {
   try {
-    const therapistId = req.user.userId; // obtenemos del token
+    const therapistId = req.user.userId;
     const { patientId, date, notes } = req.body;
 
     const session = await Session.create({
@@ -20,7 +20,6 @@ exports.createSession = async (req, res) => {
   }
 };
 
-// Obtener sesiones por paciente
 exports.getSessionsByPatient = async (req, res) => {
   try {
     const therapistId = req.user.userId;
@@ -40,7 +39,6 @@ exports.getSessionsByPatient = async (req, res) => {
   }
 };
 
-// Eliminar sesión
 exports.deleteSession = async (req, res) => {
   try {
     const therapistId = req.user.userId;

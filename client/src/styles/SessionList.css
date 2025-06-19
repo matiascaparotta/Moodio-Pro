@@ -1,0 +1,73 @@
+.session-list-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+  }
+  
+  .session-list-container h3 {
+    font-size: 22px;
+    color: var(--blue);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .session-card {
+    background-color: #f9f9ff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e2f0;
+    transition: box-shadow 0.2s;
+  }
+  
+  .session-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+  
+  .session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .session-notes {
+    color: #333;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    margin-bottom: 12px;
+  }
+  
+  .session-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .read-more-btn {
+    background: none;
+    border: none;
+    color: var(--blue);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+  }
+  
+  .read-more-btn:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .session-card {
+      padding: 16px;
+    }
+  
+    .session-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }

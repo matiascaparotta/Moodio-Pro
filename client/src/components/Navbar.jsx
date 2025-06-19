@@ -23,8 +23,8 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h2 className="logo">
-        <Link to="/" className="logo-link" onClick={closeMenu}>Moodio Pro</Link>
+      <h2 className="logo" onClick={() => { closeMenu(); navigate(token ? '/dashboard' : '/'); }}>
+        Moodio Pro
       </h2>
 
       <div className="hamburger" onClick={toggleMenu}>

@@ -3,6 +3,7 @@ import FormContainer from '../components/FormContainer';
 import InputField from '../components/InputField';
 import PrimaryButton from '../components/PrimaryButton';
 import API from '../services/api';
+import '../styles/SessionForm.css';
 
 function SessionForm({ patientId, onSessionCreated }) {
   const [form, setForm] = useState({ date: '', notes: '' });
@@ -26,26 +27,25 @@ function SessionForm({ patientId, onSessionCreated }) {
 
   return (
     <FormContainer>
-      <h2>New Session</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className="session-title">New Session</h2>
+      <form onSubmit={handleSubmit} className="session-form">
         <InputField label="Date" type="date" name="date" value={form.date} onChange={handleChange} required />
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Notes</label>
+
+        <div className="textarea-group">
+          <label htmlFor="notes">Notes</label>
           <textarea
             name="notes"
             value={form.notes}
             onChange={handleChange}
             required
-            rows="5"
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '6px',
-              border: '1px solid #ccc'
-            }}
+            rows="6"
+            placeholder="Write session notes here..."
           />
         </div>
-        <PrimaryButton type="submit">Save Session</PrimaryButton>
+
+        <div className="session-button">
+          <PrimaryButton type="submit">Save Session</PrimaryButton>
+        </div>
       </form>
     </FormContainer>
   );
