@@ -1,154 +1,95 @@
-# Moodio Pro - SaaS Platform for Emotional Health Professionals
+# Moodio Pro 🧠✨
+
+Moodio Pro is a platform designed for therapists to manage patients, clinical sessions, and their own professional profile with clarity, security, and a clean interface. Built using React, Node.js, Express, and MySQL.
 
 ---
 
-## 📌 Overview
+## 🚀 What's New in `mejoras-v2` Branch
 
-Moodio Pro is a SaaS platform specifically designed for therapists, coaches, and emotional health professionals to manage their practice efficiently.
+### 🖥️ UI & Design
+- Modern, clean, and fully responsive design.
+- Professional look across all pages.
+- Patient photo now appears as a thumbnail next to their name.
+- Optimized for both large and small screens.
+- Clearly separated action buttons (professional layout).
+- "Moodio Pro" logo redirects correctly depending on login status.
 
-The platform includes:
+### 🔐 Navigation & Authentication
+- Navbar hides "Login" and "Register" when the user is logged in.
+- Shows authenticated links: Dashboard, Profile, Patients, etc.
+- "Logout" button only visible when session is active.
 
-- Therapist registration & authentication
-- Therapist private dashboard
-- Patient management system (create, read, update, delete)
-- Public therapist profile page
-- Secure multi-tenant architecture
-- Expandable architecture for future monetization (SaaS billing, subscriptions, analytics, etc.)
+### 👩‍⚕️ Patient Management
+- Enhanced patient detail view with:
+  - Responsive profile image.
+  - Toggleable editing mode.
+  - Cancel button restores previous values.
+- Image URL field hidden when not editing.
+- Each patient card includes a thumbnail and their full name.
+- Modular CSS files for each page.
 
-This project is actively in development and follows SaaS best practices.
+### 📝 Clinical Sessions
+- Each session displayed in a separate, styled block with:
+  - Full date and time display.
+  - “Read more” button for long notes.
+  - Secure edit mode.
+  - Confirm before deleting.
+- Improved session creation form with professional textarea.
+
+### 🧑‍⚕️ Therapist Dashboard
+- Profile card with avatar, email, specialty, and bio.
+- List of patients with thumbnails and direct view buttons.
+- New button to add a patient directly from the dashboard.
+
+### 📁 Structure & Environment
+- Separate `.env.development` and `.env.production` files.
+- Seamless switching between local and production environments.
+- Protected backend using custom JWT middleware.
+- Organized folder structure: `pages`, `components`, `styles`, `services`.
 
 ---
 
-## 🚀 Tech Stack
+## 🛠️ Tech Stack
 
-### Frontend
-
-- React.js
-- React Router
-- Axios (API integration)
-- Plain CSS (minimal, clean SaaS design)
-
-### Backend
-
-- Node.js
-- Express.js
-- Sequelize ORM
-- MySQL Database
-- JWT Authentication
-- Bcrypt (password encryption)
-- dotenv (environment variables)
+- **Frontend:** React, React Router, CSS Modules, Vite
+- **Backend:** Node.js, Express
+- **Database:** MySQL + Sequelize ORM
+- **Authentication:** JWT + Custom Middleware
+- **Current Deploy:** Railway (backend & DB), Vercel (frontend)
 
 ---
 
-
-## 📦 Project Structure
+## 📦 Getting Started Locally
 
 ```bash
-Moodio-Pro/
-├── client/             # Frontend (React.js)
-│   └── src/
-│       ├── pages/          # Page level components (Login, Register, PatientForm, PatientList, TherapistProfile, Dashboard, etc.)
-│       ├── components/     # Reusable UI components (Navbar, Inputs, Buttons, Forms)
-│       └── services/       # Axios configuration & API calls
-│
-├── server/             # Backend (Node.js + Express.js + Sequelize ORM)
-│   ├── controllers/    # Business logic (auth, patients, therapist profile, sessions)
-│   ├── models/         # Sequelize models (MySQL DB)
-│   ├── routes/         # API routes (auth, patients, therapists, sessions)
-│   └── middlewares/    # Auth middlewares (JWT verification)
-│
-└── README.md           # Full professional documentation
+git clone https://github.com/matiascaparotta/Moodio-Pro.git
+cd Moodio-Pro
+git checkout mejoras-v2
 
-## ⚙ Installation
-
-### 1️⃣ Clone the repository
-
-\`\`\`bash
-git clone https://github.com/matiascaparotta/moodio-pro.git
-cd moodio-pro
-\`\`\`
-
-### 2️⃣ Install dependencies
-
-**Backend:**
-
-\`\`\`bash
-cd server
-npm install
-\`\`\`
-
-**Frontend:**
-
-\`\`\`bash
-cd ../client
-npm install
-\`\`\`
-
-### 3️⃣ Create environment variables
-
-You will need a `.env` file in `/server` with the following variables:
-
-\`\`\`env
-PORT=5001
-DB_HOST=localhost
-DB_USER=your_mysql_username
-DB_PASSWORD=your_mysql_password
-DB_NAME=moodio_pro
-JWT_SECRET=your_secret_key
-\`\`\`
-
-✅ Make sure your MySQL server is running and `moodio_pro` database exists.
-
----
-
-## 🏃 Run the project
-
-### Start Backend
-
-\`\`\`bash
-cd server
-node app.js
-\`\`\`
-
-### Start Frontend
-
-\`\`\`bash
+# Frontend
 cd client
-npm start
-\`\`\`
+npm install
+npm run dev
+
+# Backend (in a new terminal)
+cd ../server
+npm install
+npm run dev
+```
 
 ---
 
-## 🚀 Current Functionalities
+## 💡 Future Improvements (Ideas)
 
-- ✅ Therapist registration & login (JWT protected)
-- ✅ Secure token authentication (multi-tenant)
-- ✅ Patient management CRUD (each therapist manages only their patients)
-- ✅ Therapist public profile page (`/therapists/:id`)
-- ✅ SaaS scalable architecture prepared for billing, sessions, notes, audio logs and more.
-
----
-
-## 🔒 SaaS Roadmap (Next Sprints)
-
-- ✅ Therapist dashboard after profile creation
-- ✅ Therapist profile edition
-- ✅ Therapist public profile for patients
-- 🔜 Session management module
-- 🔜 SaaS Billing & Subscription Layer
-- 🔜 Admin panel
-- 🔜 Deploy (Render, PlanetScale, Vercel)
+- Calendar view of sessions.
+- PDF export of session history.
+- Notifications and reminders.
+- User roles (therapist, patient).
+- Dashboard with statistics and analytics.
 
 ---
 
-## 📖 Author
+## ✨ Author
 
-Matías Caparotta
-
----
-
-## 🏆 Status
-
-✅ MVP v1.0 SaaS Stable Core Completed  
-🚀 Actively growing as a SaaS vertical product
-Matias
+Developed with passion by **Matías Caparotta**.  
+[GitHub](https://github.com/matiascaparotta) | [LinkedIn](www.linkedin.com/in/matias-caparotta-6ba5a6292)
