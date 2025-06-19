@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const db = require('./models');
 
-// Configuración de CORS mejorada
+// Configuración de CORS mejorada para Safari y móviles
 const allowedOrigins = [
   'https://moodio-pro.vercel.app',
   'http://localhost:3000',
@@ -13,38 +13,39 @@ const allowedOrigins = [
 
 const dynamicAllowed = (origin) => {
   return (
-    allowedOrigins.includes(origin) || 
+    allowedOrigins.includes(origin) ||
     (origin && origin.endsWith('.vercel.app'))
   );
 };
 
 const corsOptions = {
   origin: (origin, callback) => {
-    if (dynamicAllowed(origin)) {
+    if (!origin || dynamicAllowed(origin)) {
       callback(null, true);
     } else {
       console.error(`Blocked by CORS: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'], // 👈 clave para que funcione el token en Safari
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Importación de rutas
+// Rutas
 const authRoutes = require('./routes/auth');
 const patientRoutes = require('./routes/patient');
 const sessionRoutes = require('./routes/session');
 const profileRoutes = require('./routes/profile');
 const therapistRoutes = require('./routes/therapist');
 
-// Sincronización de la base de datos
+// Sincronización
 db.sequelize.sync({ alter: true }).then(() => {
   console.log('Database synced');
 
-  // Registro de rutas después del sync
+  // Registro de rutas
   app.use('/api/auth', authRoutes);
   app.use('/api/patients', patientRoutes);
   app.use('/api/sessions', sessionRoutes);
