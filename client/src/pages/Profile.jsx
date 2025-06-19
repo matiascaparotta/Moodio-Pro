@@ -43,15 +43,55 @@ function Profile() {
     <FormContainer>
       <h2>My Profile</h2>
       <form onSubmit={handleSubmit}>
-        <InputField label="Full Name" name="fullName" value={profile.fullName || ''} onChange={handleChange} type="text" />
-        <InputField label="Specialty" name="specialty" value={profile.specialty || ''} onChange={handleChange} type="text" />
-        <InputField label="Bio" name="bio" value={profile.bio || ''} onChange={handleChange} type="text" />
-        <InputField label="Profile Image URL" name="profileImage" value={profile.profileImage || ''} onChange={handleChange} type="text" />
+        <InputField
+          label="Full Name"
+          name="fullName"
+          value={profile.fullName || ''}
+          onChange={handleChange}
+          type="text"
+        />
+        <InputField
+          label="Specialty"
+          name="specialty"
+          value={profile.specialty || ''}
+          onChange={handleChange}
+          type="text"
+        />
+        <InputField
+          label="Bio"
+          name="bio"
+          value={profile.bio || ''}
+          onChange={handleChange}
+          type="text"
+        />
+        <InputField
+          label="Profile Image URL"
+          name="profileImage"
+          value={profile.profileImage || ''}
+          onChange={handleChange}
+          type="text"
+        />
+
         {profile.profileImage && (
-          <div style={{ marginBottom: '20px' }}>
-            <img src={profile.profileImage} alt="Profile" width="100" height="100" style={{ borderRadius: '50%' }} />
+          <div style={{ margin: '20px auto', textAlign: 'center' }}>
+            <img
+              src={profile.profileImage}
+              alt="Profile"
+              style={{
+                width: '120px',
+                height: '120px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '2px solid var(--blue)',
+                boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+              }}
+            />
+            <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '8px' }}>
+              Profile Preview
+            </p>
           </div>
         )}
+
         <PrimaryButton type="submit">Save</PrimaryButton>
       </form>
     </FormContainer>

@@ -17,6 +17,19 @@
   font-weight: 600;
 }
 
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Contenedor de enlaces de navegación */
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
 .nav-links a {
   color: white;
   margin-left: 20px;
@@ -39,9 +52,48 @@
 .logout-btn:hover {
   background-color: #e95555;
 }
-.logo-link {
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.8rem;
-  font-weight: bold;
+
+/* Hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+  margin-left: 20px;
+}
+
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: var(--blue);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 10;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a,
+  .logout-btn {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }

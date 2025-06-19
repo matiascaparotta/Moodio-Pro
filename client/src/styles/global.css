@@ -1,49 +1,185 @@
+:root {
+  --lavender: #f5f0ff;
+  --coral: #ff6b6b;
+  --blue: #4f6ef7;
+  --dark: #333;
+  --border-radius: 12px;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #F9FAFB;
-    font-family: 'Inter', sans-serif;
-    color: #111827;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--lavender);
+  color: var(--dark);
+}
+
+/* Títulos */
+h2 {
+  color: var(--dark);
+}
+
+/* Botones */
+button {
+  background-color: var(--coral);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ff5252;
+}
+
+/* Inputs */
+input {
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Layout general */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Responsive general */
+@media (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+    margin: 20px auto;
   }
-  
-  h2 {
-    color: #111827;
-  }
-  :root {
-    --lavender: #f5f0ff;
-    --coral: #ff6b6b;
-    --blue: #4f6ef7;
-    --dark: #333;
-    --border-radius: 12px;
-  }
-  
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--lavender);
-    color: var(--dark);
-  }
-  
+
+  input,
   button {
-    background-color: var(--coral);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
+    font-size: 16px;
+    padding: 10px;
   }
-  
-  button:hover {
-    background-color: #ff5252;
-  }
-  
-  input {
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
+
+  button {
     width: 100%;
-    box-sizing: border-box;
   }
+
+  h1, h2, h3 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+}
+
+/* Estilo para la tarjeta de perfil del terapeuta */
+.profile-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Imagen de perfil responsiva */
+.profile-card img {
+  width: 120px;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid var(--blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+/* Contenido textual al lado de la imagen */
+.profile-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Responsive del perfil en móviles */
+@media (max-width: 600px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-card img {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+}
+.patient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.patient-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--coral);
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.delete-icon:hover {
+  color: #ff5252;
+}
+
+.patient-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* Responsive en móviles */
+@media (max-width: 600px) {
+  .patient-card {
+    padding: 16px;
+  }
+
+  .patient-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .patient-buttons a {
+    width: 100%;
+  }
+}

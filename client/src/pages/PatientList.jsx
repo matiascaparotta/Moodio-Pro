@@ -34,29 +34,26 @@ function PatientList() {
   };
 
   return (
-    <div style={{ maxWidth: '900px', margin: '40px auto', padding: '20px' }}>
+    <div className="container">
       <h2 style={{ color: 'var(--blue)', marginBottom: '30px' }}>Your Patients</h2>
 
       {loading && <p>Loading patients...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {!loading && patients.length === 0 && <p>No patients yet.</p>}
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div className="patient-list">
         {patients.map((patient) => (
-          <div key={patient.id} style={cardStyle}>
-            <div style={{ position: 'relative', width: '100%' }}>
-              <FaTrash 
-                onClick={() => handleDelete(patient.id)}
-                style={deleteIconStyle}
-                title="Delete patient"
-              />
-              <h3>{patient.firstName} {patient.lastName}</h3>
-              <p>Born: {patient.birthYear}</p>
-
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
-                <Link to={`/patients/${patient.id}`}><PrimaryButton>Profile</PrimaryButton></Link>
-                <Link to={`/patients/${patient.id}/sessions`}><PrimaryButton>Sessions</PrimaryButton></Link>
-              </div>
+          <div key={patient.id} className="patient-card">
+            <FaTrash 
+              onClick={() => handleDelete(patient.id)}
+              className="delete-icon"
+              title="Delete patient"
+            />
+            <h3>{patient.firstName} {patient.lastName}</h3>
+            <p>Born: {patient.birthYear}</p>
+            <div className="patient-buttons">
+              <Link to={`/patients/${patient.id}`}><PrimaryButton>Profile</PrimaryButton></Link>
+              <Link to={`/patients/${patient.id}/sessions`}><PrimaryButton>Sessions</PrimaryButton></Link>
             </div>
           </div>
         ))}
@@ -64,22 +61,5 @@ function PatientList() {
     </div>
   );
 }
-
-const cardStyle = {
-  backgroundColor: '#fff',
-  padding: '20px',
-  borderRadius: '12px',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-  position: 'relative'
-};
-
-const deleteIconStyle = {
-  position: 'absolute',
-  top: '10px',
-  right: '10px',
-  color: '#FF6B6B',
-  cursor: 'pointer',
-  fontSize: '20px'
-};
 
 export default PatientList;

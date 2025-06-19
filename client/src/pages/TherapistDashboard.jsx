@@ -24,26 +24,25 @@ function TherapistDashboard() {
   if (!profile) return <div>Loading...</div>;
 
   return (
-    <div style={{ maxWidth: '900px', margin: '40px auto', padding: '20px' }}>
-      <h2 style={{ color: 'var(--blue)', marginBottom: '10px' }}>Welcome, {profile.fullName}</h2>
-      <div style={{
-        background: '#fff',
-        padding: '20px',
-        borderRadius: '12px',
-        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-        marginBottom: '30px'
-      }}>
-        <p><strong>Email:</strong> {profile.email}</p>
-        <p><strong>Specialty:</strong> {profile.specialty}</p>
-        <p><strong>Bio:</strong> {profile.bio}</p>
+    <div className="container">
+      <h2 style={{ color: 'var(--blue)', marginBottom: '20px', textAlign: 'center' }}>
+        Welcome, {profile.fullName}
+      </h2>
+
+      {/* TARJETA DE PERFIL CON IMAGEN A LA IZQUIERDA */}
+      <div className="profile-card">
         {profile.profileImage && (
-          <div style={{ marginBottom: 20 }}>
-            <img src={profile.profileImage} alt="Profile" width="150" style={{ borderRadius: '10px' }} />
-          </div>
+          <img src={profile.profileImage} alt="Profile" />
         )}
+        <div className="profile-info">
+          <p><strong>Email:</strong> {profile.email}</p>
+          <p><strong>Specialty:</strong> {profile.specialty}</p>
+          <p><strong>Bio:</strong> {profile.bio}</p>
+        </div>
       </div>
 
-      <div style={{ marginBottom: '20px' }}>
+      {/* LISTA DE PACIENTES */}
+      <div>
         <h3 style={{ color: 'var(--blue)' }}>Your Patients</h3>
         {patients.length === 0 && <p>No patients yet.</p>}
         <ul style={{ listStyleType: 'none', padding: 0 }}>
