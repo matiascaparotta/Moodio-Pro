@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiLogOut } from 'react-icons/fi';
 import './Navbar.css';
 import { logout, getToken } from '../services/auth';
 
@@ -40,7 +41,13 @@ function Navbar() {
             <Link to="/create-patient" onClick={closeMenu}>Add Patient</Link>
             <Link to="/patients" onClick={closeMenu}>Patients</Link>
             <Link to="/profile" onClick={closeMenu}>Profile</Link>
-            <button onClick={() => { handleLogout(); closeMenu(); }} className="logout-btn">Logout</button>
+            <button
+              onClick={() => { handleLogout(); closeMenu(); }}
+              className="logout-icon-btn"
+              title="Logout"
+            >
+              <FiLogOut size={20} />
+            </button>
           </>
         ) : (
           <>

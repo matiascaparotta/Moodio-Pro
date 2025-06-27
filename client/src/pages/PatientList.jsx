@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import API from '../services/api';
 import PrimaryButton from '../components/PrimaryButton';
 import { FaTrash } from 'react-icons/fa';
@@ -9,6 +9,7 @@ function PatientList() {
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -44,7 +45,11 @@ function PatientList() {
       <div className="patient-list">
         {patients.map((patient) => (
           <div key={patient.id} className="patient-card">
-            <div className="patient-info-box">
+            <div
+              className="patient-info-box clickable"
+              onClick={() => navigate(`/patients/${patient.id}`)}
+              title="View Profile"
+            >
               {patient.profileImage && (
                 <img
                   src={patient.profileImage}
@@ -57,9 +62,11 @@ function PatientList() {
                 <p className="patient-meta">({patient.birthYear})</p>
               </div>
             </div>
+
             <div className="patient-actions">
-              <Link to={`/patients/${patient.id}`}><PrimaryButton>Profile</PrimaryButton></Link>
-              <Link to={`/patients/${patient.id}/sessions`}><PrimaryButton>Sessions</PrimaryButton></Link>
+              <Link to={`/patients/${patient.id}/sessions`}>
+                <PrimaryButton>Sessions</PrimaryButton>
+              </Link>
               <button onClick={() => handleDelete(patient.id)} className="delete-btn" title="Delete patient">
                 <FaTrash />
               </button>

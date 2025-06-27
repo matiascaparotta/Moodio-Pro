@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import API from '../services/api';
 import PrimaryButton from '../components/PrimaryButton';
+import SessionList from './SessionList';
 import '../styles/PatientDetail.css';
 
 function PatientDetail() {
@@ -9,6 +10,7 @@ function PatientDetail() {
   const [patient, setPatient] = useState(null);
   const [originalPatient, setOriginalPatient] = useState(null);
   const [editing, setEditing] = useState(false);
+  const [activeTab, setActiveTab] = useState('profile');
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -49,80 +51,98 @@ function PatientDetail() {
     <div className="container patient-detail">
       <h2 className="page-title">{patient.firstName} {patient.lastName}</h2>
 
-      {patient.profileImage && (
-        <div className="patient-image">
-          <img src={patient.profileImage} alt="Profile" />
-        </div>
+      <div className="tab-buttons">
+        <button
+          className={activeTab === 'profile' ? 'active-tab' : ''}
+          onClick={() => setActiveTab('profile')}
+        >
+          Profile
+        </button>
+        <button
+          className={activeTab === 'sessions' ? 'active-tab' : ''}
+          onClick={() => setActiveTab('sessions')}
+        >
+          Sessions
+        </button>
+      </div>
+
+      {activeTab === 'profile' && (
+        <>
+          {patient.profileImage && (
+            <div className="patient-image">
+              <img src={patient.profileImage} alt="Profile" />
+            </div>
+          )}
+
+          <div className="patient-info">
+            {editing && (
+              <>
+                <label>Image URL:</label>
+                <input
+                  name="profileImage"
+                  value={patient.profileImage || ''}
+                  onChange={handleChange}
+                />
+              </>
+            )}
+
+            <label>Gender:</label>
+            {editing ? (
+              <input name="gender" value={patient.gender || ''} onChange={handleChange} />
+            ) : (
+              <p>{patient.gender}</p>
+            )}
+
+            <label>Birth Year:</label>
+            {editing ? (
+              <input name="birthYear" value={patient.birthYear || ''} onChange={handleChange} />
+            ) : (
+              <p>{patient.birthYear}</p>
+            )}
+
+            <label>Conditions:</label>
+            {editing ? (
+              <input name="existingConditions" value={patient.existingConditions || ''} onChange={handleChange} />
+            ) : (
+              <p>{patient.existingConditions || 'N/A'}</p>
+            )}
+
+            <label>Medications:</label>
+            {editing ? (
+              <input name="currentMedications" value={patient.currentMedications || ''} onChange={handleChange} />
+            ) : (
+              <p>{patient.currentMedications || 'N/A'}</p>
+            )}
+
+            <label>Goals:</label>
+            {editing ? (
+              <input name="treatmentGoals" value={patient.treatmentGoals || ''} onChange={handleChange} />
+            ) : (
+              <p>{patient.treatmentGoals || 'N/A'}</p>
+            )}
+
+            <label>Notes:</label>
+            {editing ? (
+              <input name="notes" value={patient.notes || ''} onChange={handleChange} />
+            ) : (
+              <p>{patient.notes || 'N/A'}</p>
+            )}
+          </div>
+
+          <div className="button-group">
+            {editing ? (
+              <>
+                <PrimaryButton onClick={handleSave}>Save</PrimaryButton>
+                <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
+              </>
+            ) : (
+              <PrimaryButton onClick={() => setEditing(true)}>Edit</PrimaryButton>
+            )}
+          </div>
+        </>
       )}
 
-      <div className="patient-info">
-        {editing && (
-          <>
-            <label>Image URL:</label>
-            <input
-              name="profileImage"
-              value={patient.profileImage || ''}
-              onChange={handleChange}
-            />
-          </>
-        )}
-
-        <label>Gender:</label>
-        {editing ? (
-          <input name="gender" value={patient.gender || ''} onChange={handleChange} />
-        ) : (
-          <p>{patient.gender}</p>
-        )}
-
-        <label>Birth Year:</label>
-        {editing ? (
-          <input name="birthYear" value={patient.birthYear || ''} onChange={handleChange} />
-        ) : (
-          <p>{patient.birthYear}</p>
-        )}
-
-        <label>Conditions:</label>
-        {editing ? (
-          <input name="existingConditions" value={patient.existingConditions || ''} onChange={handleChange} />
-        ) : (
-          <p>{patient.existingConditions || 'N/A'}</p>
-        )}
-
-        <label>Medications:</label>
-        {editing ? (
-          <input name="currentMedications" value={patient.currentMedications || ''} onChange={handleChange} />
-        ) : (
-          <p>{patient.currentMedications || 'N/A'}</p>
-        )}
-
-        <label>Goals:</label>
-        {editing ? (
-          <input name="treatmentGoals" value={patient.treatmentGoals || ''} onChange={handleChange} />
-        ) : (
-          <p>{patient.treatmentGoals || 'N/A'}</p>
-        )}
-
-        <label>Notes:</label>
-        {editing ? (
-          <input name="notes" value={patient.notes || ''} onChange={handleChange} />
-        ) : (
-          <p>{patient.notes || 'N/A'}</p>
-        )}
-      </div>
-
-      <div className="button-group">
-        {editing ? (
-          <>
-            <PrimaryButton onClick={handleSave}>Save</PrimaryButton>
-            <PrimaryButton onClick={handleCancel}>Cancel</PrimaryButton>
-          </>
-        ) : (
-          <PrimaryButton onClick={() => setEditing(true)}>Edit</PrimaryButton>
-        )}
-        <Link to={`/patients/${patient.id}/sessions`}>
-          <PrimaryButton>View Sessions</PrimaryButton>
-        </Link>
-      </div>
+      {activeTab === 'sessions' && <SessionList patientId={id} />}
     </div>
   );
 }

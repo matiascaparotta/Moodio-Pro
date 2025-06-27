@@ -12,17 +12,23 @@
   padding: 16px 20px;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .patient-card:hover {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  background-color: #f9f9ff;
 }
 
 .patient-info-box {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.patient-info-box.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .patient-avatar {

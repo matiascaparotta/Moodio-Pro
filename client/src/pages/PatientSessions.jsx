@@ -23,7 +23,7 @@ function PatientSessions() {
 
   return (
     <div style={{ maxWidth: 900, margin: '40px auto', padding: '0 20px' }}>
-      <h2>Sessions for: {patient?.firstName} {patient?.lastName}</h2>
+    
       <SessionForm patientId={patientId} onSessionCreated={() => window.location.reload()} />
       <SessionList patientId={patientId} />
     </div>

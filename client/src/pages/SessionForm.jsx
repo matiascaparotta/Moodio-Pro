@@ -26,28 +26,30 @@ function SessionForm({ patientId, onSessionCreated }) {
   };
 
   return (
-    <FormContainer>
-      <h2 className="session-title">New Session</h2>
-      <form onSubmit={handleSubmit} className="session-form">
-        <InputField label="Date" type="date" name="date" value={form.date} onChange={handleChange} required />
+    <div className="session-block">
+      <div className="session-form-container">
+        <h2 className="session-title">New Session</h2>
+        <form onSubmit={handleSubmit} className="session-form">
+          <InputField label="Date" type="date" name="date" value={form.date} onChange={handleChange} required />
 
-        <div className="textarea-group">
-          <label htmlFor="notes">Notes</label>
-          <textarea
-            name="notes"
-            value={form.notes}
-            onChange={handleChange}
-            required
-            rows="6"
-            placeholder="Write session notes here..."
-          />
-        </div>
+          <div className="textarea-group">
+            <label htmlFor="notes">Notes</label>
+            <textarea
+              name="notes"
+              value={form.notes}
+              onChange={handleChange}
+              required
+              rows="6"
+              placeholder="Write session notes here..."
+            />
+          </div>
 
-        <div className="session-button">
-          <PrimaryButton type="submit">Save Session</PrimaryButton>
-        </div>
-      </form>
-    </FormContainer>
+          <div className="session-button">
+            <PrimaryButton type="submit">Save Session</PrimaryButton>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 
